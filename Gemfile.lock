@@ -4,17 +4,21 @@ GEM
     ast (2.4.1)
     backports (3.18.1)
     engtagger (0.2.1)
-    mini_portile2 (2.4.0)
+    mini_portile2 (2.8.7)
     multi_json (1.15.0)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
-    nokogiri (1.10.10)
-      mini_portile2 (~> 2.4.0)
+    nokogiri (1.15.5)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
+    nokogiri (1.15.5-x86_64-linux)
+      racc (~> 1.4)
     opal (1.0.3)
       ast (>= 2.3.0)
       parser (~> 2.6)
     parser (2.7.1.4)
       ast (~> 2.4.1)
+    racc (1.8.1)
     rack (2.2.3)
     rack-protection (2.0.8.1)
       rack
@@ -40,7 +44,7 @@ PLATFORMS
 
 DEPENDENCIES
   engtagger
-  nokogiri
+  nokogiri (= 1.15.5)
   opal
   ruby_rhymes
   sinatra
