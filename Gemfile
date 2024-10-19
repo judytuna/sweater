@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
+ruby '3.3.5'
 gem 'ruby_rhymes'
 gem 'opal'
 gem 'engtagger'
-gem 'nokogiri', '1.15.5'
+gem 'nokogiri'
 gem 'sinatra'
 gem 'sinatra-contrib'
-
