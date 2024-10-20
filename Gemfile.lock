@@ -60,6 +60,7 @@ DEPENDENCIES
   ruby_rhymes
   sinatra
   sinatra-contrib
+  webrick
 
 RUBY VERSION
    ruby 3.3.5p100
