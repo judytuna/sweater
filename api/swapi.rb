@@ -22,55 +22,55 @@ module Swapi
       return {status: 200, "Content-Type": 'text/plain', body: 'you got a page' }
     end
 
-    def rhyme_line(line)
-      words = line.split(/[\s\n]+/)
-      result = words.map do |word|
-        word.gsub(/[^\w\d]+/,'')
-      end.reject do |word|
-        word.strip.length.zero? || word =~ /[,'’]/
-      end.map do |word|
-        tagged = @tagger.add_tags(word)
-        xml = Nokogiri::XML(tagged)
-        part = xml.children.first.name
-        is_blacklisted = !/^[vnj]/.match(part)
+    # def rhyme_line(line)
+    #   words = line.split(/[\s\n]+/)
+    #   result = words.map do |word|
+    #     word.gsub(/[^\w\d]+/,'')
+    #   end.reject do |word|
+    #     word.strip.length.zero? || word =~ /[,'’]/
+    #   end.map do |word|
+    #     tagged = @tagger.add_tags(word)
+    #     xml = Nokogiri::XML(tagged)
+    #     part = xml.children.first.name
+    #     is_blacklisted = !/^[vnj]/.match(part)
 
-        if is_blacklisted
-          word
-        else
+    #     if is_blacklisted
+    #       word
+    #     else
 
-          syllables_to_match = word.to_phrase.syllables
-          rhymes = word.to_phrase.flat_rhymes.select do |rhymed_word|
-            rhymed_word.to_phrase.syllables == syllables_to_match
-          end
-          rhymed = rhymes.sort_by do |rhyme|
-            @words.find_index(rhyme) || 0
-          end.select do |rhyme|
-            !/[\d]/.match(rhyme)
-          end.first(10).sample
-
-
-          rhymed || word
-        end
-      end.join(' ')
-    end
+    #       syllables_to_match = word.to_phrase.syllables
+    #       rhymes = word.to_phrase.flat_rhymes.select do |rhymed_word|
+    #         rhymed_word.to_phrase.syllables == syllables_to_match
+    #       end
+    #       rhymed = rhymes.sort_by do |rhyme|
+    #         @words.find_index(rhyme) || 0
+    #       end.select do |rhyme|
+    #         !/[\d]/.match(rhyme)
+    #       end.first(10).sample
 
 
-    def do_POST request, response
-      @words = File.read('frequencies').lines
-      @tagger = EngTagger.new
-      q = JSON.parse(request.body.read)['text']
-      rhymed = q.lines.map do |line|
-        rhyme_line(line)
-      end.to_a.join("\n")
+    #       rhymed || word
+    #     end
+    #   end.join(' ')
+    # end
 
 
-      json :rhymed => rhymed
+    # def do_POST request, response
+    #   @words = File.read('frequencies').lines
+    #   @tagger = EngTagger.new
+    #   q = JSON.parse(request.body.read)['text']
+    #   rhymed = q.lines.map do |line|
+    #     rhyme_line(line)
+    #   end.to_a.join("\n")
 
-    end
+
+    #   json :rhymed => rhymed
+
+    # end
   end
 end
 
 # Avoids name conflicts when multiple functions are present in the /api folder
-# Handler = Proc.new do |req, res|
-#   return Swapi::Handler # HEYDEV! Refer to your custom module
-# end
+Handler = Proc.new do |req, res|
+  return Swapi::Handler # HEYDEV! Refer to your custom module
+end
