@@ -55,7 +55,7 @@ module Swapi
     end
 
 
-    def post '/rhyme'
+    def do_POST request, response
       @words = File.read('frequencies').lines
       @tagger = EngTagger.new
       q = JSON.parse(request.body.read)['text']
