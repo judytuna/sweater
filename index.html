@@ -6,16 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Alternative Lyrics Generator</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-48356846-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-48356846-3');
-</script>
-
   </head>
   <body>
     <section class="hero">
@@ -67,7 +57,6 @@
       const q = inputLyrics.value
       encodedQ = encodeURIComponent(JSON.stringify({text: q}))
       loader.style.display='block'
-      ga('send', 'event', 'activity', 'generateLyrics')
       const rhymeResult = await fetch('/api/swapi', {
         method: 'POST',
         headers: {
