@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Alternative Lyrics Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-48356846-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-48356846-3');
+</script>
+
+  </head>
+  <body>
+    <section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Sweater
+      </h1>
+      <h2 class="subtitle">Find alternative lyrics that rhyme with any song. Some lyrics are random, and will yield new lyrics on each invocation.</h2>
+    </div>
+  </div>
+</section>
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          <textarea id="inputLyrics" class="textarea is-primary" placeholder="Some lyrics should be entered here"></textarea>
+          <button class="button is-primary large is-fullwidth" id="invokeButton">Get Lyrics</button>
+          <progress id="loader" class="progress is-small is-primary" max="100">15%</progress>
+          <textarea id="result" class="textarea is-secondary" placeholder="Crumb steerings wood see bettered beer"></textarea>
+          <br/>
+          <article class="message">
+  <div class="message-header">
+    Who did this?
+  </div>
+
+
+  <div class="message-body">
+    <a href="http://twitter.com/tastycode">@tastycode</a>. If you enjoy this, please send BTC to <a href="bitcoin:bc1qnm44qzsnwyrl3uynywv4n58jy2tmtkd5wpjwp0">bc1qnm44qzsnwyrl3uynywv4n58jy2tmtkd5wpjwp0</a>. Or venmo/cashapp @tastycode
+    <br/>
+    Sourcecode: <a href="http://github.com/tastycode/sweater">github.com/tastycode/sweater</a>
+    <br/>
+
+    Shortlink: <a href="http://bit.ly/sweaterme">bit.ly/sweaterme</a>
+  </div>
+</article>
+        </div>
+      </div>
+    </div>
+  </section>
+  </body>
+  <script>
+    const button = document.querySelector('#invokeButton')
+    const inputLyrics = document.querySelector('#inputLyrics')
+    const result = document.querySelector('#result')
+    const loader = document.querySelector('#loader')
+    loader.style.display = 'none'
+    button.addEventListener('click', async () => {
+      const q = inputLyrics.value
+      encodedQ = encodeURIComponent(JSON.stringify({text: q}))
+      loader.style.display='block'
+      ga('send', 'event', 'activity', 'generateLyrics')
+      const rhymeResult = await fetch('/rhyme', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({text: q})
+      })
+      const parsed = await rhymeResult.json()
+      result.value = parsed.rhymed
+      result.setAttribute('rows', parsed.rhymed.split("\n").length)
+      loader.style.display = 'none'
+    })
+  </script>
+</html>
