@@ -72,5 +72,5 @@ end
 
 # Avoids name conflicts when multiple functions are present in the /api folder
 Handler = Proc.new do |req, res|
-  return Swapi::Handler # HEYDEV! Refer to your custom module
+  Swapi::Handler # HEYDEV! Refer to your custom module
 end
