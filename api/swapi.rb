@@ -81,10 +81,10 @@ Handler = Proc.new do |req, res|
   # Swapi::Handler # HEYDEV! Refer to your custom module
   res.status = 200
   res['Content-Type'] = 'text/text; charset=utf-8'
-	if req.query.has_key?("name")
-		name = req.query["name"]
-		res.body = "Hello, #{name}!"
+	if req.query.has_key?("text")
+		text = req.query["text"]
+		res.body = "You submitted: #{text}!"
 	else
-		res.body = "Hello, stranger!"
+		res.body = "No text data in query"
 	end
 end

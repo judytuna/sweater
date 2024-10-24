@@ -68,7 +68,7 @@
       encodedQ = encodeURIComponent(JSON.stringify({text: q}))
       loader.style.display='block'
       ga('send', 'event', 'activity', 'generateLyrics')
-      const rhymeResult = await fetch('/rhyme', {
+      const rhymeResult = await fetch('/api/swapi', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
