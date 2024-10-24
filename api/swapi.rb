@@ -126,7 +126,8 @@ Handler = Proc.new do |req, res|
 
     # json :rhymed => rhymed
     puts rhymed
-    json_string = '{"rhymed": "' + rhymed + '"}'
+    ruby_hash = {'rhymed' => rhymed}
+    json_string = JSON.generate(ruby_hash)
     res.body = json_string
 	else
 		res.body = "No data in req.body"
