@@ -22,6 +22,11 @@ module Swapi
       return {status: 200, "Content-Type": 'text/plain', body: 'you got a page' }
     end
 
+    def post request, response
+      response.status = 200
+      response.body = "hello swapi"
+    end
+
     def rhyme_line(line)
       words = line.split(/[\s\n]+/)
       result = words.map do |word|
