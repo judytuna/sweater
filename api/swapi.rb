@@ -5,6 +5,7 @@ require 'nokogiri'
 require 'sinatra'
 require 'cgi'
 require 'sinatra/json'
+require 'logger'
 
 # HEYDEV! Edit module name and action_on() body in order to write your own function
 module Swapi
@@ -13,6 +14,8 @@ module Swapi
       status, content_type, body = self.class.action_on request
 
       puts "------body is" + body
+      logger = Logger.new(STDOUT)
+      logger.info "body is #{body}"
 
       response = {'Content-Type': 'application/json; charset=utf-8'}
       response.status = status
