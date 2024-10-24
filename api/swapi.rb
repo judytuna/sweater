@@ -8,25 +8,25 @@ require 'sinatra/json'
 require 'logger'
 
 # HEYDEV! Edit module name and action_on() body in order to write your own function
-module Swapi
-  class Handler < WEBrick::HTTPServlet::AbstractServlet
-    def do_GET request, response
-      status, content_type, body = self.class.action_on request
+# module Swapi
+#   class Handler < WEBrick::HTTPServlet::AbstractServlet
+#     def do_GET request, response
+#       status, content_type, body = self.class.action_on request
 
-      puts "------body is" + body
-      logger = Logger.new(STDOUT)
-      logger.info "body is #{body}"
+#       puts "------body is" + body
+#       logger = Logger.new(STDOUT)
+#       logger.info "body is #{body}"
 
-      response = {'Content-Type': 'application/json; charset=utf-8'}
-      response.status = status
-      response['Content-Type'] = content_type
-      response.body = body
-    end
+#       response = {'Content-Type': 'application/json; charset=utf-8'}
+#       response.status = status
+#       response['Content-Type'] = content_type
+#       response.body = body
+#     end
 
-    def self.action_on request
-      puts "WWWWWWWWWWWWWWWWWWW"
-      return {status: 200, "Content-Type": 'text/plain', body: 'you got a page' }
-    end
+#     def self.action_on request
+#       puts "WWWWWWWWWWWWWWWWWWW"
+#       return {status: 200, "Content-Type": 'text/plain', body: 'you got a page' }
+#     end
 
     # def rhyme_line(line)
     #   words = line.split(/[\s\n]+/)
@@ -73,10 +73,13 @@ module Swapi
     #   json :rhymed => rhymed
 
     # end
-  end
+  # end
 end
 
 # Avoids name conflicts when multiple functions are present in the /api folder
 Handler = Proc.new do |req, res|
-  Swapi::Handler # HEYDEV! Refer to your custom module
+  # Swapi::Handler # HEYDEV! Refer to your custom module
+  res.status = 200
+  res['Content-Type'] = 'text/plain'
+  res.body = 'this is a response body'
 end
