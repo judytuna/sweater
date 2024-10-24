@@ -74,12 +74,17 @@ require 'logger'
 
     # end
   # end
-end
+# end
 
 # Avoids name conflicts when multiple functions are present in the /api folder
 Handler = Proc.new do |req, res|
   # Swapi::Handler # HEYDEV! Refer to your custom module
   res.status = 200
-  res['Content-Type'] = 'text/plain'
-  res.body = 'this is a response body'
+  res['Content-Type'] = 'text/text; charset=utf-8'
+	if req.query.has_key?("name")
+		name = req.query["name"]
+		res.body = "Hello, #{name}!"
+	else
+		res.body = "Hello, stranger!"
+	end
 end
