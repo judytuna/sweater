@@ -12,7 +12,7 @@ module Swapi
     def do_GET request, response
       status, content_type, body = self.class.action_on request
 
-      console.log("body is", body)
+      puts "body is" + body
 
       response = {'Content-Type': 'application/json; charset=utf-8'}
       response.status = status
