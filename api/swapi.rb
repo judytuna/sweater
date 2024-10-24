@@ -12,7 +12,7 @@ module Swapi
     def do_GET request, response
       status, content_type, body = self.class.action_on request
 
-      puts "body is" + body
+      puts "------body is" + body
 
       response = {'Content-Type': 'application/json; charset=utf-8'}
       response.status = status
@@ -21,6 +21,7 @@ module Swapi
     end
 
     def self.action_on request
+      puts "WWWWWWWWWWWWWWWWWWW"
       return {status: 200, "Content-Type": 'text/plain', body: 'you got a page' }
     end
 
