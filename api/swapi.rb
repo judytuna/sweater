@@ -81,8 +81,8 @@ Handler = Proc.new do |req, res|
   # Swapi::Handler # HEYDEV! Refer to your custom module
   res.status = 200
   res['Content-Type'] = 'text/text; charset=utf-8'
-	if req.body.has_key?("text")
-		text = req.body["text"]
+	if req.body
+		text = req.body
 		res.body = "You submitted: #{text}!"
 	else
 		res.body = "No text data in query"
