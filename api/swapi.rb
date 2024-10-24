@@ -118,7 +118,7 @@ Handler = Proc.new do |req, res|
 	if req.body
     @words = File.read('frequencies').lines
     @tagger = EngTagger.new
-    q = JSON.parse(req.body.read)['text']
+    q = JSON.parse(req.body)['text']
     rhymed = q.lines.map do |line|
       rhyme_line(line)
     end.to_a.join("\n")
